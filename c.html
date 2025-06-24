@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+        
+const phrase = prompt("Écris une phrase :");
+
+const mots = phrase.split(" ");
+
+const motsMaj = mots.map(mot => mot.toUpperCase());
+
+const motsFiltres = motsMaj.filter(mot => mot.length > 3);
+
+const obj = {};
+motsFiltres.forEach(mot => {
+  obj[mot] = mot.length;
+});
+
+const cles = Object.keys(obj);
+console.log("Clés de l’objet :", cles);
+
+
+    </script>
+</body>
+</html>

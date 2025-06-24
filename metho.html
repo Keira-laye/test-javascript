@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    
+    <meta charset="UTF-8"> 
+    <title>Traducteur de langue</title> 
+    <style>
+
+        body { 
+            font-family: Arial;
+            max-width: 600px;
+            margin: 0 auto; 
+            padding: 20px; 
+        }
+        input, select, button { 
+            padding: 10px; 
+            margin: 5px 0; 
+            width: 100%; 
+        }
+        #result { 
+            margin-top: 20px; 
+            padding: 10px; 
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>dictionnaire de traduction</h1>
+    
+
+    <input type="text" id="text" placeholder="Entrez un mot">
+    
+    
+    <select id="from_lang">
+        <option value="fr">Français</option>
+        <option value="en">Anglais</option>
+    </select>
+    
+    
+    <select id="to_lang">
+        <option value="en">Anglais</option>
+        <option value="fr">Français</option>
+    </select>
+    
+
+    <button onclick="translate()">Traduire</button>
+    
+    
+    <div id="result"></div>
+
+    
+    <script>
+        
+        async function translate() {
+            
+            const text = document.getElementById("text").value; 
+            const fromLang = document.getElementById("from_lang").value; 
+            const toLang = document.getElementById("to_lang").value;
+            const resultDiv = document.getElementById("result"); 
+            
+            const API_KEY = "VOTRE_CLE_API"; 
+            const REGION = "francecentral"; 
+
+            const endpoint = "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0";
+            const url = `${endpoint}&from=${fromLang}&to=${toLang}`;
+
+            try {
+
+                const response = await fetch(url, {
+                    method: "POST", 
+                    headers: {
+                        "Ocp-Apim-Subscription-Key": API_KEY, 
+                        "Ocp-Apim-Subscription-Region": REGION,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify([{ "text": text }]),
+                });
+
+
+                const data = await response.json();
+                
+
+                resultDiv.innerHTML = `<strong>Traduction :</strong> ${data[0].translations[0].text}`;
+            } catch (error) {
+
+                resultDiv.innerHTML = `Erreur : ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

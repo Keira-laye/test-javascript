@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Métadonnées de base -->
+    <meta charset="UTF-8"> <!-- Encodage UTF-8 pour les caractères spéciaux -->
+    <title>Traducteur de langue</title> <!-- Titre de l'onglet -->
+    <style>
+        /* CSS minimal pour la mise en page */
+        body { 
+            font-family: Arial; /* Police simple */
+            max-width: 600px; /* Largeur maximale */
+            margin: 0 auto; /* Centrage horizontal */
+            padding: 20px; /* Espacement interne */
+        }
+        input, select, button { 
+            padding: 10px; /* Espace dans les champs */
+            margin: 5px 0; /* Marge externe */
+            width: 100%; /* Pleine largeur */
+        }
+        #result { 
+            margin-top: 20px; /* Espace au-dessus du résultat */
+            padding: 10px; /* Espace interne */
+            background: #f0f0f0; /* Fond gris clair */
+        }
+    </style>
+</head>
+<body>
+    <!-- Structure de la page -->
+    <h1>dictionnaire de traduction</h1> <!-- Titre principal -->
+    
+    <!-- Champ de saisie -->
+    <input type="text" id="text" placeholder="Entrez un mot">
+    
+    <!-- Liste déroulante pour la langue source -->
+    <select id="from_lang">
+        <option value="fr">Français</option>
+        <option value="en">Anglais</option>
+    </select>
+    
+    <!-- Liste déroulante pour la langue cible -->
+    <select id="to_lang">
+        <option value="en">Anglais</option>
+        <option value="fr">Français</option>
+    </select>
+    
+    <!-- Bouton de traduction -->
+    <button onclick="translate()">Traduire</button>
+    
+    <!-- Zone d'affichage du résultat -->
+    <div id="result"></div>
+
+    <!-- Script JavaScript -->
+    <script>
+        // Fonction asynchrone pour la traduction
+        async function translate() {
+            // Récupération des valeurs des champs
+            const text = document.getElementById("text").value; // Texte à traduire
+            const fromLang = document.getElementById("from_lang").value; // Langue source (ex: "fr")
+            const toLang = document.getElementById("to_lang").value; // Langue cible (ex: "en")
+            const resultDiv = document.getElementById("result"); // Div pour afficher le résultat
+
+            // Clé API et région Azure (À REMPLACER AVEC VOS INFORMATIONS)
+            const API_KEY = "VOTRE_CLE_API"; // Clé secrète de l'API Microsoft
+            const REGION = "francecentral"; // Région du service Azure (ex: "westeurope")
+
+            // Construction de l'URL de l'API
+            const endpoint = "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0";
+            const url = `${endpoint}&from=${fromLang}&to=${toLang}`; // Ajout des paramètres de langue
+
+            try {
+                // Envoi de la requête HTTP POST à l'API
+                const response = await fetch(url, {
+                    method: "POST", // Méthode HTTP
+                    headers: { // En-têtes requis par Microsoft
+                        "Ocp-Apim-Subscription-Key": API_KEY, // Clé d'authentification
+                        "Ocp-Apim-Subscription-Region": REGION, // Localisation du service
+                        "Content-Type": "application/json", // Format des données envoyées
+                    },
+                    body: JSON.stringify([{ "text": text }]), // Corps de la requête (texte à traduire)
+                });
+
+                // Récupération de la réponse au format JSON
+                const data = await response.json();
+                
+                // Affichage du résultat (accès à la traduction dans l'objet JSON)
+                resultDiv.innerHTML = `<strong>Traduction :</strong> ${data[0].translations[0].text}`;
+            } catch (error) {
+                // Gestion des erreurs (ex: problème de réseau, clé API invalide)
+                resultDiv.innerHTML = `Erreur : ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

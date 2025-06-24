@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+<h1>Bienvenue dans les API </h1>
+<button type="button" id="boutton"> Clic ici pour plus de blagues </button>
+
+<p id="blagues"> </p>
+<p id="afficher"> </p>
+
+
+<script>
+
+    const boutton = document.getElementById("boutton");
+    const blagues = document.getElementById("blagues");
+    const afficher = document.getElementById("afficher");
+
+    boutton.addEventListener("click", () => {
+
+        fetch("https://official-joke-api.appspot.com/random_joke")
+
+        .then((response) => response.json())
+        .then((stockage) => {
+
+            blagues.textContent = stockage.setup;
+            afficher.textContent = stockage.punchline;
+
+        })
+        .catch((error) => {
+            console.error(error)
+        });
+         
+    });
+
+    </script>
+    </body>
+    </html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div>
+        <input type="text" id="name" placeholder="Entrez votre nom">
+        <button id="envoyer">Envoyer</button>
+    </div>
+    <script>
+        const apiUrl = "https://jsonplaceholder.typicode.com/posts";
+
+        document.getElementById("envoyer").addEventListener("click", function() {
+            const inputNom = document.getElementById("name").value;
+
+            const donneesAEnvoyer = {
+                name: inputNom
+            };
+
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(donneesAEnvoyer)
+            })
+            .then(reponse => {
+                if (!reponse.ok) {
+                    throw new Error(`Erreur HTTP! statut: ${reponse.status}`);
+                }
+                return reponse.json();
+            })
+            .then(donnees => {
+                console.log("Succès! Réponse de l'API :", donnees);
+            })
+            .catch(erreur => {
+                console.error("Erreur lors de l'envoi :", erreur);
+            });
+        });
+    </script>
+</body>
+</html>
