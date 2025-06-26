@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let voiture = {
+          marque: "Toyota",
+          année: 2020
+        };
+
+        voiture.couleur = "Rouge";
+        
+        voiture.afficherInfos = function() {
+            console.log("Marque :", this.marque);
+            console.log("Année :", this.année);
+            console.log("Couleur :", this.couleur);
+            };
+        
+        voiture.afficherInfos();
+    </script>
+</body>
+</html>
+
