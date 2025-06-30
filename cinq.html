@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <div id="boite" draggable="true" style="width: 100px; height: 100px; background-color:blue;"></div>
+    <div id="zone" style="width:150px; height:150px; border:2px dashed gray; margin-top: 20px;"></div> -->
+  <!-- <style>
+    ul {
+      list-style: none;
+      padding: 0;
+      width: 200px;
+    }
+
+    li {
+      padding: 10px;
+      margin-bottom: 5px;
+      background-color: #ddd;
+      cursor: move;
+    }
+
+    .dragging {
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+
+  <h3>Réorganise la liste :</h3>
+  <ul id="maListe">
+    <li draggable="true">Item 1</li>
+    <li draggable="true">Item 2</li>
+    <li draggable="true">Item 3</li>
+  </ul>
+
+  <script>
+    const items = document.querySelectorAll('#maListe li');
+
+    let draggedItem = null;
+
+    items.forEach(item => {
+      item.addEventListener('dragstart', () => {
+        draggedItem = item;
+        item.classList.add('dragging');
+      });
+
+      item.addEventListener('dragend', () => {
+        draggedItem = null;
+        item.classList.remove('dragging');
+      });
+
+      item.addEventListener('dragover', (e) => {
+        e.preventDefault(); 
+      });
+
+      item.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const list = document.getElementById('maListe');
+        if (draggedItem && draggedItem !== item) {
+          list.insertBefore(draggedItem, item);
+        }
+      });
+    }); -->
+
+// const boite = document.getElementById("boite");
+// const zone = document.getElementById("zone");
+
+// boite.addEventListener("dragstart", function(event) {
+//   event.dataTransfer.setData("text", "boite");
+// })
+
+// zone.addEventListener("dragover", function(event) {
+//    event.preventDefault();
+// })
+
+// zone.addEventListener("drop", function(event) {
+// event.preventDefault();
+// const id = event.dataTransfer.getData("text");
+// const element = document.getElementById(id);
+// zone.appendChild(element);
+// })
+
+
+    </script>
+</body>
+</html>

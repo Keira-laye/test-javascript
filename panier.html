@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Panier d'achat simplifié</title>
+  <style>
+    .zone {
+      border: 2px dashed #999;
+      padding: 20px;
+      margin: 10px;
+      min-height: 100px;
+    }
+
+    .produit {
+      margin: 10px;
+      padding: 10px;
+      cursor: grab;
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🛍️ Produits disponibles</h2>
+  <div class="zone" id="produits">
+    <div class="produit" draggable="true" id="livre">📘 Livre</div>
+    <div class="produit" draggable="true" id="cahier">📒 Cahier</div>
+    <div class="produit" draggable="true" id="stylo">🖊️ Stylo</div>
+  </div>
+
+  <h2>🛒 Panier</h2>
+  <div class="zone" id="panier"></div>
+
+  <script>
+    const produits = document.querySelectorAll('.produit');
+
+    produits.forEach(produit => {
+      produit.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', produit.id);
+      });
+    });
+
+    const panier = document.getElementById('panier');
+
+    panier.addEventListener('dragover', (e) => {
+      e.preventDefault();
+    });
+
+    panier.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const idProduit = e.dataTransfer.getData('text/plain');
+      const element = document.getElementById(idProduit);
+      const clone = element.cloneNode(true);
+      clone.removeAttribute('id');
+      clone.setAttribute('draggable', 'false');
+      panier.appendChild(clone);
+    });
+  </script>
+
+</body>
+</html>

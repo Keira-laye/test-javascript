@@ -7,11 +7,63 @@
 </head>
 <body>
    <script>
-    function personne(nom, age,)
-       this.nom = nom;
-       this.age =age;
+    // function personne(nom, age,) {
+    //    this.nom = nom;
+    //    this.age =age; 
 
+    //    this.saluer = function() {
+    //         //   console.log("salut, je suis " + this.nom);
+    //      };
+    //    }
+
+    //    let saran = new personne("saran", 20);
+    //    let koura = new personne("koura", 22);
+    //      let mariam = new personne("mariam", 23);
+
+    // function animal (nom, espece) {
+    //     this.nom = nom;
+    //     this.espece = espece;
+    //  }
+
+    //  animal.prototype.presenter = function () {
+    //     console.log("c'est une " + this.espece + " et il s'appelle " + this.nom + " trump")
+
+    //  }
+
+    //  const animal1 = new Animal("trump", "chien");
+    //  const animal2 = new Animal ("pichou")
+
+
+        class Utilisateur {
+            constructor (nom, email) {
+                this.nom = nom;
+                this.email = email;
+            }
+
+            sePresenter() {
+                console.log(`bonjour, je suis ${this.nom} - email : ${this.email}`);
+
+
+            }
+        }
+        class Admin extends Utilisateur {
+            constructor(nom, email, role) {
+                super(nom, email); 
+                this.role = role; 
+            }
+        
+
+        afficherRole () {
+            console.log(`je suis un admin avec le role : ${this.role}`);
+          }
+        }
+
+        const admin1 = new Admin ("Momo", "momo@egmail.com", "superadmin");
+
+        admin1.sePresenter();
+        admin1.afficherRole();
        
    </script> 
+
 </body>
 </html>

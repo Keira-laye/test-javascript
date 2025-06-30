@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Eleve {
+  constructor(nom, classe, notes) {
+    this.nom = nom;
+    this.classe = classe;
+    this.notes = notes;
+  }
+
+  calculerMoyenne() {
+    const total = this.notes[0] + this.notes[1] + this.notes[2];
+    const moyenne = total / 3;
+    console.log(this.nom + " a une moyenne de " + moyenne);
+  }
+}
+
+    </script>
+</body>
+</html>
